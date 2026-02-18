@@ -1,0 +1,138 @@
+&i2c1 {
+	pinctrl-0 = <&i2c1_sda_pb9 &i2c1_scl_pb6>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+/ {
+	chip_selects {
+		compatible = "gpio-leds";
+
+		audio_cs: cs_0 {
+			gpios = <&gpiod 4 GPIO_ACTIVE_HIGH>;
+			label = "Audio CS";
+		};
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		status_led0: led_0 {
+			gpios = <&gpiod 0 GPIO_ACTIVE_HIGH>;
+		};
+
+		status_led1: led_1 {
+			gpios = <&gpiod 1 GPIO_ACTIVE_HIGH>;
+		};
+
+		status_led2: led_2 {
+			gpios = <&gpiod 2 GPIO_ACTIVE_HIGH>;
+		};
+
+		status_led3: led_3 {
+			gpios = <&gpioe 3 GPIO_ACTIVE_HIGH>;
+		};
+
+		status_led4: led_4 {
+			gpios = <&gpioe 5 GPIO_ACTIVE_HIGH>;
+		};
+
+		debug_led0: led_5 {
+			gpios = <&gpiod 12 GPIO_ACTIVE_HIGH>;
+		};
+
+		debug_led1: led_6 {
+			gpios = <&gpiod 13 GPIO_ACTIVE_HIGH>;
+		};
+
+		debug_led2: led_7 {
+			gpios = <&gpiod 14 GPIO_ACTIVE_HIGH>;
+		};
+
+		debug_led3: led_8 {
+			gpios = <&gpiod 15 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	buttons {
+		compatible = "gpio-keys";
+
+		switch0: button_0 {
+			gpios = <&gpioe 8 GPIO_ACTIVE_HIGH>;
+		};
+
+		switch1: button_1 {
+			gpios = <&gpioe 9 GPIO_ACTIVE_HIGH>;
+		};
+
+		switch2: button_2 {
+			gpios = <&gpioe 10 GPIO_ACTIVE_HIGH>;
+		};
+
+		switch3: button_3 {
+			gpios = <&gpioe 11 GPIO_ACTIVE_HIGH>;
+		};
+
+		switch4: button_4 {
+			gpios = <&gpioe 12 GPIO_ACTIVE_HIGH>;
+		};
+
+		switch5: button_5 {
+			gpios = <&gpioe 13 GPIO_ACTIVE_HIGH>;
+		};
+
+		switch6: button_6 {
+			gpios = <&gpioe 14 GPIO_ACTIVE_HIGH>;
+		};
+
+		switch7: button_7 {
+			gpios = <&gpioe 15 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	aliases {
+		cs0 = &audio_cs;
+		status-led0 = &status_led0;
+		status-led1 = &status_led1;
+		status-led2 = &status_led2;
+		status-led3 = &status_led3;
+		status-led4 = &status_led4;
+		debug-led0 = &debug_led0;
+		debug-led1 = &debug_led1;
+		debug-led2 = &debug_led2;
+		debug-led3 = &debug_led3;
+		switch0 = &switch0;
+		switch1 = &switch1;
+		switch2 = &switch2;
+		switch3 = &switch3;
+		switch4 = &switch4;
+		switch5 = &switch5;
+		switch6 = &switch6;
+		switch7 = &switch7;
+	};
+};
+
+&dma1 {
+	status = "okay";
+};
+
+&plli2s {
+	status = "okay";
+	mul-n = <338>;
+	div-r = <3>;
+};
+
+i2s_tx: &i2s3 {
+	pinctrl-0 = <&i2s3_mck_pc7 &i2s3_ck_pc10 &i2s3_sd_pc12 &i2s3_ws_pa4>;
+	pinctrl-names = "default";
+	status = "okay";
+	clocks = <&rcc STM32_CLOCK_BUS_APB1 0x00008000>,
+			 <&rcc STM32_SRC_PLLI2S_R I2S_SEL(0)>;
+	mck-enabled;
+};
+
+&zephyr_udc0 {
+	cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+};

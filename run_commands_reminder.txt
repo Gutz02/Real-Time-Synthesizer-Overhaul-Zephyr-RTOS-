@@ -1,0 +1,8 @@
+activate my python env 
+    .venv\Scripts\activate.bat
+
+To build first do ^ then run: (Do this only once!)
+    west build -b stm32f4_disco Group56 -d build/group56
+
+To flash the board we then run:(After building always run flash)
+    west flash -d build/group56 -r openocd
