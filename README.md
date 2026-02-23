@@ -1,4 +1,4 @@
-# Real-Time Synthesizer Overhaul (Zephyr RTOS) — CESE4025 Assignment B
+# Real-Time Synthesizer Overhaul (Zephyr RTOS)
 
 This project takes a provided microcontroller synthesizer that was implemented as a **superloop** and redesigns it into a **real-time Zephyr-based system** that produces clear audio (no clipping/clicking) under normal load.
 
@@ -7,7 +7,7 @@ The original implementation executes four tasks sequentially in a fixed loop:
 1) peripherals (switches/encoders), 2) keyboard input, 3) audio synthesis, 4) audio output (I2S/DMA).  
 This caused missed deadlines and audible artifacts because tasks have different timing/jitter requirements.
 
-## What we did (based on our report)
+## What we did
 ### 1) Measured timing + CPU utilization
 - Used a logic analyzer to measure **AECT/WCET** of each task and derived processor utilization for average and worst-case use cases. 
 - Fixed measurement methodology by moving LED toggles inside each task so timing reflects true task execution (not superloop “leftover time”).
